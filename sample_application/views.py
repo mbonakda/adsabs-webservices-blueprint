@@ -43,4 +43,4 @@ class ExampleApiUsage(Resource):
       return {'response':r, 'api-token-which-should-be-kept-secret':current_app.client.token}, 200
     except: #For the moment, 401s are not JSON encoded; this will be changed in the future
       r = r.text
-      return {'raw_response':r, 'api-token-which-should-be-kept-secret':current_app.client.token}, 501
+      return {'raw_response':r, 'api-token-which-should-be-kept-secret':current_app.client.token}, 401

@@ -29,8 +29,8 @@ class TestWebservices(TestCase):
     for rule in self.app.url_map.iter_rules():
       if not rule.arguments: #only test routes that do not require arguments.
         url = url_for(rule.endpoint)
-      r = self.client.get(url)
-      self.assertTrue(r.status_code < 500)
+        r = self.client.get(url)
+        self.assertTrue(r.status_code < 500)
 
   def test_ResourcesRoute(self):
     '''Tests for the existence of a /resources route, and that it returns properly formatted JSON data'''

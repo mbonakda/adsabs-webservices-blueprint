@@ -2,3 +2,4 @@ werkzeug
 flask
 flask-restful
 Flask-Testing
+requests

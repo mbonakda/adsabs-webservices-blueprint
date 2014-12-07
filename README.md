@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/adsabs/adsabs-webservices-blueprint.svg?branch=master)](https://travis-ci.org/adsabs/adsabs-webservices-blueprint)
+
 # adsabs-webservices-blueprint
 
 A sample Flask application for backend adsabs (micro) web services. 

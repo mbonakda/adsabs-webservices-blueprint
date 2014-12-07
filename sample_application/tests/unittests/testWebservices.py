@@ -2,19 +2,19 @@ import sys, os
 PROJECT_HOME = os.path.abspath(os.path.join(os.path.dirname(__file__),'../../'))
 sys.path.append(PROJECT_HOME)
 from flask.ext.testing import TestCase
-from flask import url_for
+from flask import url_for, Flask
 import unittest
 import requests
 import time
+import app
+
 
 class TestWebservices(TestCase):
-  '''Tests that each route as an http response'''
+  '''Tests that each route is an http response'''
   
   def create_app(self):
     '''Start the wsgi application'''
-    from app import create_app
-    self.app = create_app()
-    return self.app
+    return app.app
 
   def test_timeResource(self):
     '''Test the /time route'''

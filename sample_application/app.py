@@ -24,6 +24,10 @@ def create_app(blueprint_only=False):
 
   if blueprint_only:
     return blueprint
-
   app.register_blueprint(blueprint)
   return app
+
+app = create_app()
+
+if __name__ == "__main__":
+  app.run()

@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, Flask
+from flask import Blueprint
 from flask import Flask, g
 from views import blueprint, Resources, UnixTime, PrintArg, ExampleApiUsage
 from flask.ext.restful import Api

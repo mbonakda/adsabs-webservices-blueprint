@@ -14,7 +14,6 @@ def create_app(blueprint_only=False):
     app.config.from_pyfile('local_config.py')
   except IOError:
     pass
-  app.client = Client(app.config['CLIENT'])
 
   api = Api(blueprint)
   api.add_resource(Resources, '/resources')

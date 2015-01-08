@@ -8,14 +8,14 @@ import requests
 import time
 import app
 
-_app = app.create_app()
 
 class TestWebservices(TestCase):
   '''Tests that each route is an http response'''
   
   def create_app(self):
-    '''Start the wsgi application'''
-    return _app
+    '''Create the wsgi application'''
+    app_ = app.create_app()
+    return app_
 
   def test_timeResource(self):
     '''Test the /time route'''

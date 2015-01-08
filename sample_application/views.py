@@ -10,12 +10,6 @@ if not hasattr(config,'CLIENT'):
   config.CLIENT = None
 client = Client(config.CLIENT)
 
-blueprint = Blueprint(
-    'sample_application',
-    __name__,
-    static_folder=None,
-)
-
 #This resource must be available for every adsabs webservice.
 class Resources(Resource):
   '''Overview of available resources'''

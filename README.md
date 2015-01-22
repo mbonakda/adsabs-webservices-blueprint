@@ -2,14 +2,19 @@
 
 # adsabs-webservices-blueprint
 
-A sample Flask application for backend adsabs (micro) web services. 
+A sample Flask application for backend adsabs (micro) web services. To integrate into the ADS-API, an application must expose a `/resources` route that advertises that application's resources, scopes, and rate limits. 
 
-### Overview
+`GET` on `/resources` should return `JSON` that looks like:
 
-  - `wsgi.py`: WSGI entrypoint for all applications
-  - `sample_application/app.py`:  Application boostrapping code, including defining app-specific routes
-  - `sample_application/config.py`: app.config; Any definitions in `local_config.py` in the same directory will overwrite.
-  - `sample_application/views.py`: flask-restful based views.
-  - `sample_application/client.py`: thin wrapper around requests.session; bound to app at initialization. Useful for applications that require sending e.g. oauth2 tokens to other services
-  - `sample_application/README.md`: Application specific README.md
-  - `sample_application/tests/`: unittests
+    {
+        "/route": {
+            "scopes": ["red","green"],
+            "rate_limit": [1000,86400],
+            "description": "docstring for this route",
+            "methods": ["HEAD","OPTIONS","GET"],
+            "private": true
+        }
+    }
+
+
+To facilitate that, one can define that route explitictly (see i.e. `sample_application/views.py`), or by  using [flask-discoverer](https://github.com/adsabs/flask-discoverer) (see i.e. `sample_application2/app.py`)

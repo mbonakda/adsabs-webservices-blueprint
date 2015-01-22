@@ -12,7 +12,6 @@ A sample Flask application for backend adsabs (micro) web services. To integrate
             "rate_limit": [1000,86400],
             "description": "docstring for this route",
             "methods": ["HEAD","OPTIONS","GET"],
-            "private": true
         }
     }
 

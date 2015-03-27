@@ -16,4 +16,4 @@ A sample Flask application for backend adsabs (micro) web services. To integrate
     }
 
 
-To facilitate that, one can define that route explitictly (see i.e. `sample_application/views.py`), or by  using [flask-discoverer](https://github.com/adsabs/flask-discoverer) (see i.e. `sample_application2/app.py`)
+To facilitate that, one can define that route explitictly/manually or by using [flask-discoverer](https://github.com/adsabs/flask-discoverer)

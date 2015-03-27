@@ -1,9 +1,9 @@
 import os
 from flask import Blueprint
 from flask import Flask, g
-from views import Resources, UnixTime, PrintArg, ExampleApiUsage
+from views import UnixTime, PrintArg, ExampleApiUsage
 from flask.ext.restful import Api
-from client import Client
+from flask.ext.discoverer import Discoverer
 
 def _create_blueprint_():
   '''
@@ -31,7 +31,6 @@ def create_app(blueprint_only=False):
 
   blueprint = _create_blueprint_()
   api = Api(blueprint)
-  api.add_resource(Resources, '/resources')
   api.add_resource(UnixTime, '/time')
   api.add_resource(PrintArg,'/print/<string:arg>')
   api.add_resource(ExampleApiUsage,'/search')
@@ -39,8 +38,10 @@ def create_app(blueprint_only=False):
   if blueprint_only:
     return blueprint
   app.register_blueprint(blueprint)
+
+  discoverer = Discoverer(app)
   return app
 
 if __name__ == "__main__":
   app = create_app()
-  app.run()
+  app.run(debug=True,use_reloader=False)

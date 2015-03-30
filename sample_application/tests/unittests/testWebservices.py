@@ -50,15 +50,15 @@ class TestWebservices(TestCase):
     self.assertIn('now',r.json)
     self.assertNotEqual(r.json.get('now'),time.time()) #The clocks should be (very) slightly different
   
-  # def test_nonSpecificUrlRoutes(self):
-  #   '''Iterates over each route that doesn't require an argument
-  #   testing for http response code < 500'''
-  #   for rule in self.app.url_map.iter_rules():
-  #     if not rule.arguments: #only test routes that do not require arguments.
-  #       url = url_for(rule.endpoint)
-  #       with mock_adsws_api(self.app.config.get('SAMPLE_APPLICATION_ADSWS_API_URL')):
-  #         r = self.client.get(url)
-  #       self.assertTrue(r.status_code < 500,msg="URL: {0}".format(url))
+  def test_nonSpecificUrlRoutes(self):
+    '''Iterates over each route that doesn't require an argument
+    testing for http response code < 500'''
+    for rule in self.app.url_map.iter_rules():
+      if not rule.arguments: #only test routes that do not require arguments.
+        url = url_for(rule.endpoint)
+        with mock_adsws_api(self.app.config.get('SAMPLE_APPLICATION_ADSWS_API_URL')):
+          r = self.client.get(url)
+        self.assertTrue(r.status_code < 500,msg="URL: {0}".format(url))
 
   def test_ResourcesRoute(self):
     '''Tests for the existence of a /resources route, and that it returns properly formatted JSON data'''

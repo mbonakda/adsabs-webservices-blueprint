@@ -1,3 +1,3 @@
-# sample_application2
+# sample_application
 
 Documentation for this specific application

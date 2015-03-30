@@ -82,7 +82,7 @@ class TestWebservices(TestCase):
       r = self.client.get(url)
     self.assertStatus(r,200)
     self.assertEqual(r.json['api-response'],'success')
-    self.assertEqual(r.json['token'],"Bearer {token}".format(token=self.app.config.get('ADSWS_API_TOKEN')))
+    self.assertEqual(r.json['token'],"Bearer {token}".format(token=self.app.config.get('SAMPLE_APPLICATION_ADSWS_API_TOKEN')))
 
 
 if __name__ == '__main__':

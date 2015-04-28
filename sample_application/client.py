@@ -23,8 +23,8 @@ class Client:
         """
         Constructor
 
-        :param client_config:
-        :param send_oauth2_token:
+        :param client_config: configuration dictionary of the client
+        :param send_oauth2_token: should the app send the oauth token
         :return: no return
         """
 

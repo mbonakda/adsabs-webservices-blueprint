@@ -4,7 +4,7 @@ Application
 
 import os
 from flask import Blueprint
-from flask import Flask, g
+from flask import Flask
 from views import UnixTime, PrintArg, ExampleApiUsage
 from flask.ext.restful import Api
 from flask.ext.discoverer import Discoverer
@@ -20,7 +20,7 @@ __license__ = 'MIT'
 
 def _create_blueprint_():
     """
-    Returns a initialized Flask.Blueprint instance;  This should be in a closure
+    Returns an initialized Flask.Blueprint instance; This should be in a closure
     instead of the top level of a module because a blueprint can only be
     registered once. Having it at the top level creates a problem with unittests
     in that the app is created/destroyed at every test, but its blueprint is

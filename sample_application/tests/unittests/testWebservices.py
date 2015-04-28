@@ -56,6 +56,7 @@ class MockADSWSAPI:
                 }
             )
             return 200, headers, resp
+
         HTTPretty.register_uri(
             HTTPretty.GET,
             self.api_endpoint,
@@ -95,7 +96,7 @@ class TestWebservices(TestCase):
         """
         Create the wsgi application
 
-        :return: application
+        :return: application instance
         """
         app_ = app.create_app()
         return app_
@@ -113,7 +114,7 @@ class TestWebservices(TestCase):
         self.assertIn('now', r.json)
 
         # The clocks should be (very) slightly different
-        self.assertNotEqual(r.json.get('now'), time.time())
+        self.assertAlmostEqual(r.json.get('now'), time.time(), delta=1)
   
     def test_non_specific_url_routes(self):
         """

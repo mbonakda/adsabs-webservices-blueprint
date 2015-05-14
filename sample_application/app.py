@@ -8,6 +8,7 @@ from flask import Flask
 from views import UnixTime, PrintArg, ExampleApiUsage
 from flask.ext.restful import Api
 from flask.ext.discoverer import Discoverer
+from database import db
 
 __author__ = 'V. Sudilovsky'
 __maintainer__ = 'V. Sudilovsky'
@@ -62,6 +63,8 @@ def create_app(blueprint_only=False):
     if blueprint_only:
         return blueprint
     app.register_blueprint(blueprint)
+
+    db.init_app(app)
 
     discoverer = Discoverer(app)
     return app

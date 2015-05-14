@@ -25,3 +25,4 @@ SAMPLE_APPLICATION_ADSWS_API_TOKEN = 'this is a secret api token!'
 SAMPLE_APPLICATION_CLIENT = Client(
     {'TOKEN': SAMPLE_APPLICATION_ADSWS_API_TOKEN}
 )
+SQLALCHEMY_BINDS = {'sample':'sqlite:///:memory:'}

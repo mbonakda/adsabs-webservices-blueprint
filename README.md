@@ -27,7 +27,7 @@ A Vagrantfile and puppet manifest are available for development within a virtual
 
 To load and enter the VM: `vagrant up && vagrant ssh`
 
-## database migrations
+## database migrations (only relevant when a database is used in the application)
 
 To make changes to the database associated with the application:
 
@@ -38,5 +38,5 @@ To make changes to the database associated with the application:
 
 Notes:
 
-1. Installation of `Flask-Migrate` created the directory `migrations`. Because the sample application uses `SQLALCHEMY_BINDS` to define the database URI, the script `migrations/env.py` needed a manual update: replace `current_app.config.get('SQLALCHEMY_DATABASE_URI')` by `current_app.config.get('SQLALCHEMY_BINDS')['sample']`
+1. Installation of `Flask-Migrate` created the directory `migrations`. If the application uses `SQLALCHEMY_DATABASE_URI` as database URI, you can ignore the following remark. If the application uses `SQLALCHEMY_BINDS` to define the database URI, the script `migrations/env.py` needs a manual update: replace `current_app.config.get('SQLALCHEMY_DATABASE_URI')` by `current_app.config.get('SQLALCHEMY_BINDS')['sample']`
 2. After running the `migrate` step, some manual editing of the migration script will be necessary because of the definition of one of the table columns: the column `Column(postgresql.ARRAY(String))` gets translated into `sa.Column('bar', postgresql.ARRAY(String()), nullable=True)` in the migration, which will throw an exception if left unedited. The entry `String()` has to be changed into `sa.String()`. This is true in general for all types used in `ARRAY`.

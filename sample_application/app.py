@@ -8,7 +8,7 @@ from flask import Flask
 from views import UnixTime, PrintArg, ExampleApiUsage
 from flask.ext.restful import Api
 from flask.ext.discoverer import Discoverer
-from database import db
+from models import db
 
 __author__ = 'V. Sudilovsky'
 __maintainer__ = 'V. Sudilovsky'

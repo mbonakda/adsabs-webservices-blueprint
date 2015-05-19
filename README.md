@@ -16,25 +16,25 @@ A sample Flask application for backend adsabs (micro) web services. To integrate
     }
 
 
-To facilitate that, one can define that route explitictly/manually or by using [flask-discoverer](https://github.com/adsabs/flask-discoverer)
+To facilitate that, one can define that route explitictly/manually or by using [flask-discoverer](https://github.com/adsabs/flask-discoverer). This blueprint is pre-configured to do just this.
 
 ## development
 
-A Vagrantfile and puppet manifest are available for development within a virtual machine. To use the vagrant VM defined here you will need to install *Vagrant* and *VirtualBox*. 
+For convenience, a Vagrantfile and puppet manifest are available to facilitate development within a virtual machine. To use the vagrant VM defined here you will need to install *Vagrant* and *VirtualBox*.
 
   * [Vagrant](https://docs.vagrantup.com)
   * [VirtualBox](https://www.virtualbox.org)
 
 To load and enter the VM: `vagrant up && vagrant ssh`
 
-## database migrations (only relevant when a database is used in the application)
+## database migrations (only relevant when a database is managed by the application)
 
-To make changes to the database associated with the application:
+To make changes to the database schema associated with the application:
 
-  * Update the database model in `database.py`
-  * execute: python sample_application/manage.py db migrate
-  * if necessary, make manual changes in the generated migration script (see below)
-  * execute: python sample_application/manage.py db upgrade
+  * Update the database model in `models.py`
+  * execute: `python manage.py db migrate`
+  * if necessary, make manual changes in the migration scripts generated in `migrations/versions` (see notes below)
+  * execute: `python manage.py db upgrade`
 
 Notes:
 

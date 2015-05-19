@@ -11,7 +11,7 @@ SAMPLE_APPLICATION_PARAM = {
 SAMPLE_APPLICATION_ADSWS_API_URL = 'https://api.adsabs.harvard.edu'
 
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///'
 
 # These lines are necessary only if the app needs to be a client of the
 # adsws-api

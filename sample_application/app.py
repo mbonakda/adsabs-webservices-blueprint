@@ -1,13 +1,13 @@
 """
 Application
 """
-
 import os
 from flask import Blueprint
 from flask import Flask
 from views import UnixTime, PrintArg, ExampleApiUsage
 from flask.ext.restful import Api
 from flask.ext.discoverer import Discoverer
+from utils import setup_logging_handler
 
 __author__ = 'V. Sudilovsky'
 __maintainer__ = 'V. Sudilovsky'
@@ -62,6 +62,10 @@ def create_app(blueprint_only=False):
     if blueprint_only:
         return blueprint
     app.register_blueprint(blueprint)
+
+    handler = setup_logging_handler(level=app.config['SAMPLE_APPLICATION_LOG_LEVEL'])
+    app.logger.addHandler(handler)
+    app.logger.setLevel(handler.level)
 
     discoverer = Discoverer(app)
     return app

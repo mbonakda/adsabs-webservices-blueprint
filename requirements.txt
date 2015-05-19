@@ -2,6 +2,8 @@ werkzeug
 flask
 flask-restful
 Flask-Testing
+Flask-Script
+Flask-Migrate
 requests
 flask-discoverer
 httpretty

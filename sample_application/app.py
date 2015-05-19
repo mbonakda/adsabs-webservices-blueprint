@@ -11,30 +11,11 @@ from flask.ext.discoverer import Discoverer
 from models import db
 
 
-def _create_blueprint_():
-    """
-    Returns an initialized Flask.Blueprint instance; This should be in a closure
-    instead of the top level of a module because a blueprint can only be
-    registered once. Having it at the top level creates a problem with unittests
-    in that the app is created/destroyed at every test, but its blueprint is
-    still the same object which was already registered.
-
-    :return: an instantiated object of the Blueprint class
-    """
-
-    return Blueprint(
-        'sample_application',
-        __name__,
-        static_folder=None,
-    )
-
-
-def create_app(blueprint_only=False):
+def create_app():
     """
     Create the application and return it to the user
 
-    :param blueprint_only: if only the blue print is wanted
-    :return: blue print or application, depending upon blueprint_only
+    :return: flask.Flask application
     """
 
     app = Flask(__name__, static_folder=None)
@@ -46,19 +27,15 @@ def create_app(blueprint_only=False):
     except IOError:
         pass
 
-    blueprint = _create_blueprint_()
-    api = Api(blueprint)
+    api = Api(app)
     api.add_resource(UnixTime, '/time')
     api.add_resource(PrintArg, '/print/<string:arg>')
     api.add_resource(ExampleApiUsage, '/search')
 
-    if blueprint_only:
-        return blueprint
-    app.register_blueprint(blueprint)
-
     db.init_app(app)
 
-    discoverer = Discoverer(app)
+    Discoverer(app)
+
     return app
 
 if __name__ == '__main__':

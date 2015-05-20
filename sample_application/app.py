@@ -7,7 +7,7 @@ from flask import Flask
 from views import UnixTime, PrintArg, ExampleApiUsage
 from flask.ext.restful import Api
 from flask.ext.discoverer import Discoverer
-from utils import setup_logging_handler
+from app_logging import Logging
 
 __author__ = 'V. Sudilovsky'
 __maintainer__ = 'V. Sudilovsky'
@@ -63,9 +63,8 @@ def create_app(blueprint_only=False):
         return blueprint
     app.register_blueprint(blueprint)
 
-    handler = setup_logging_handler(level=app.config['SAMPLE_APPLICATION_LOG_LEVEL'])
-    app.logger.addHandler(handler)
-    app.logger.setLevel(handler.level)
+    logging = Logging()
+    logging.init_app(app)
 
     discoverer = Discoverer(app)
     return app

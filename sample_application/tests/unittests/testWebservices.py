@@ -2,14 +2,6 @@
 Test webservices
 """
 
-__author__ = 'V. Sudilovsky'
-__maintainer__ = 'V. Sudilovsky'
-__copyright__ = 'ADS Copyright 2014, 2015'
-__version__ = '1.0'
-__email__ = 'ads@cfa.harvard.edu'
-__status__ = 'Production'
-__license__ = 'MIT'
-
 import sys
 import os
 PROJECT_HOME = os.path.abspath(
@@ -27,14 +19,13 @@ from httpretty import HTTPretty
 
 class MockADSWSAPI:
     """
-    Mock the ADSWS API
+    context manager that mocks a ADSWS API response
     """
     def __init__(self, api_endpoint):
         """
         Constructor
 
         :param api_endpoint: name of the API end point
-        :return: no return
         """
 
         self.api_endpoint = api_endpoint
@@ -45,7 +36,7 @@ class MockADSWSAPI:
             :param request: HTTP request
             :param uri: URI/URL to send the request
             :param headers: header of the HTTP request
-            :return:
+            :return: httpretty response
             """
             resp = json.dumps(
                 {
@@ -67,8 +58,6 @@ class MockADSWSAPI:
     def __enter__(self):
         """
         Defines the behaviour for __enter__
-
-        :return: no return
         """
 
         HTTPretty.enable()
@@ -80,7 +69,6 @@ class MockADSWSAPI:
         :param etype: exit type
         :param value: exit value
         :param traceback: the traceback for the exit
-        :return: no return
         """
 
         HTTPretty.reset()
@@ -95,8 +83,6 @@ class TestWebservices(TestCase):
     def create_app(self):
         """
         Create the wsgi application
-
-        :return: application instance
         """
         app_ = app.create_app()
         return app_
@@ -104,11 +90,9 @@ class TestWebservices(TestCase):
     def test_time_resource(self):
         """
         Test the /time route
-
-        :return: no return
         """
 
-        url = url_for('sample_application.unixtime')
+        url = url_for('unixtime')
         r = self.client.get(url)
         self.assertEqual(r.status_code, 200)
         self.assertIn('now', r.json)
@@ -120,8 +104,6 @@ class TestWebservices(TestCase):
         """
         Iterates over each route that doesn't require an argument testing for
         http response code < 500
-
-        :return: no return
         """
 
         for rule in self.app.url_map.iter_rules():
@@ -140,8 +122,6 @@ class TestWebservices(TestCase):
         """
         Tests for the existence of a /resources route, and that it returns
         properly formatted JSON data
-
-        :return: no return
         """
 
         r = self.client.get('/resources')
@@ -183,11 +163,9 @@ class TestWebservices(TestCase):
         """
         Test a route that acts as a client to the main adsws-api. Mocks the
         response from the adsws-api
-
-        :return:
         """
 
-        url = url_for('sample_application.exampleapiusage')
+        url = url_for('exampleapiusage')
 
         with MockADSWSAPI(
                 self.app.config.get('SAMPLE_APPLICATION_ADSWS_API_URL')

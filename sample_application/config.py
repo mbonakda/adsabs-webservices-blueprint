@@ -1,14 +1,7 @@
 """
-Configuration file
+Configuration file. Please prefix application specific config values with
+the application name.
 """
-
-__author__ = 'V. Sudilovsky'
-__maintainer__ = 'V. Sudilovsky'
-__copyright__ = 'ADS Copyright 2014, 2015'
-__version__ = '1.0'
-__email__ = 'ads@cfa.harvard.edu'
-__status__ = 'Production'
-__license__ = 'MIT'
 
 import sys
 
@@ -38,8 +31,11 @@ LOGGING_DISK_SETTINGS = dict(filename=LOGGING_DISK_PATH,
                              delay=False,
                              utc=False)
 
+SQLALCHEMY_DATABASE_URI = 'sqlite:///'
+
 # These lines are necessary only if the app needs to be a client of the
 # adsws-api
+# This pattern will be deprecated in the next release
 from client import Client
 SAMPLE_APPLICATION_ADSWS_API_TOKEN = 'this is a secret api token!'
 SAMPLE_APPLICATION_CLIENT = Client(

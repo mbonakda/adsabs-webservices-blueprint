@@ -9,7 +9,7 @@ SAMPLE_APPLICATION_PARAM = {
               ' as a python module',
 }
 
-SAMPLE_APPLICATION_LOGGING_DICTIONARY = {
+SAMPLE_APPLICATION_LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {

@@ -21,22 +21,22 @@ def create_app():
 
     app = Flask(__name__, static_folder=None)
     app.url_map.strict_slashes = False
-    Consul(app)
 
+    # Load config and logging
+    Consul(app)  # load_config expects consul to be registered
     load_config(app)
+    logging.config.dictConfig(
+        app.config['SAMPLE_APPLICATION_LOGGING']
+    )
 
+    # Register extensions
     api = Api(app)
+    Discoverer(app)
+    db.init_app(app)
+
     api.add_resource(UnixTime, '/time')
     api.add_resource(PrintArg, '/print/<string:arg>')
     api.add_resource(ExampleApiUsage, '/search')
-
-    db.init_app(app)
-
-    Discoverer(app)
-
-    logging.config.dictConfig(
-        app.config['SAMPLE_APPLICATION_LOGGING_DICTIONARY']
-    )
 
     return app
 
@@ -56,13 +56,11 @@ def load_config(app):
     try:
         app.config.from_pyfile('local_config.py')
     except IOError:
-        pass  # todo: log this failure
-
+        app.logger.warning("Could not load local_config.py")
     try:
         app.extensions['consul'].apply_remote_config()
     except ConsulConnectionError, e:
-        pass  # todo: log this failure
-
+        app.logger.warning("Could not apply config from consul: {}".format(e))
 
 if __name__ == '__main__':
     app = create_app()

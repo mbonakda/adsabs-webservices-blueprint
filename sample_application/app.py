@@ -5,7 +5,6 @@ Application factory
 import logging.config
 from views import UnixTime, PrintArg, ExampleApiUsage
 from models import db
-from utils import Logging
 
 from flask import Flask
 from flask.ext.restful import Api
@@ -22,11 +21,6 @@ def create_app():
 
     app = Flask(__name__, static_folder=None)
     app.url_map.strict_slashes = False
-
-    logging.config.dictConfig(
-        app.config['SAMPLE_APPLICATION_LOGGING_DICTIONARY']
-    )
-
     Consul(app)
 
     load_config(app)
@@ -38,9 +32,11 @@ def create_app():
 
     db.init_app(app)
 
-    logger = Logging(app)
+    Discoverer(app)
 
-    discoverer = Discoverer(app)
+    logging.config.dictConfig(
+        app.config['SAMPLE_APPLICATION_LOGGING_DICTIONARY']
+    )
 
     return app
 

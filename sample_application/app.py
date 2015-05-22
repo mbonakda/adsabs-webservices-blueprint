@@ -3,6 +3,7 @@ Application factory
 """
 from views import UnixTime, PrintArg, ExampleApiUsage
 from models import db
+from utils import Logging
 
 from flask import Flask
 from flask.ext.restful import Api
@@ -30,12 +31,10 @@ def create_app():
 
     db.init_app(app)
 
-    Discoverer(app)
-
-    logging = Logging()
-    logging.init_app(app)
+    logger = Logging(app)
 
     discoverer = Discoverer(app)
+
     return app
 
 

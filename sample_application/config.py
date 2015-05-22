@@ -3,8 +3,6 @@ Configuration file. Please prefix application specific config values with
 the application name.
 """
 
-import sys
-
 SAMPLE_APPLICATION_PARAM = {
     'message': 'config params should be prefixed with the application name',
     'reason': 'this will allow easier integration if this app is incorporated'
@@ -12,23 +10,12 @@ SAMPLE_APPLICATION_PARAM = {
 }
 
 # General log settings
-LOGGING_LOG_LEVEL = 'DEBUG'
-LOGGING_LOG_FORMAT = '%(levelname)s\t%(process)d [%(asctime)s]:\t%(message)s'
-LOGGING_DATE_FORMAT = '%m/%d/%Y %H:%M:%S'
-# Allowed types: DISK, SYSLOG, STDOUT
-LOGGING_LOG_TYPES = ['STDOUT']
-
-# Logging preferences
-LOGGING_STDOUT_SETTINGS = dict(stream=sys.stdout)
-LOGGING_SYSLOG_SETTINGS = dict(address='/dev/log')
-LOGGING_DISK_PATH = '/tmp/app.log'
-LOGGING_DISK_SETTINGS = dict(filename=LOGGING_DISK_PATH,
-                             when='h',
-                             interval=1,
-                             backupCount=0,
-                             encoding=None,
-                             delay=False,
-                             utc=False)
+# Levels allowed: NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL
+SAMPLE_APPLICATION_LOGGING_LEVEL = 'CRITICAL'
+# Allowed handlers: file, console, syslog
+SAMPLE_APPLICATION_LOGGING_HANDLERS = ['file', 'console', 'syslog']
+# Only valid for 'file' handler type
+SAMPLE_APPLICATION_LOGGING_FILE_PATH = '/tmp/app.log'
 
 SQLALCHEMY_DATABASE_URI = 'sqlite://'
 

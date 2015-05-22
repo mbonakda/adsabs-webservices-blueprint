@@ -22,6 +22,8 @@ class UnixTime(Resource):
         HTTP GET request
         :return: the unix time now
         """
+
+        current_app.logger.info('Example of logging within the app.')
         return {'now': time.time()}, 200
 
 

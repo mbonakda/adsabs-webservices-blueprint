@@ -2,6 +2,7 @@
 Application factory
 """
 
+import logging.config
 from views import UnixTime, PrintArg, ExampleApiUsage
 from models import db
 
@@ -32,6 +33,10 @@ def create_app():
     db.init_app(app)
 
     Discoverer(app)
+
+    logging.config.dictConfig(
+        app.config['SAMPLE_APPLICATION_LOGGING_DICTIONARY']
+    )
 
     return app
 

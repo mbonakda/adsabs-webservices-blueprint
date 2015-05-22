@@ -9,13 +9,43 @@ SAMPLE_APPLICATION_PARAM = {
               ' as a python module',
 }
 
-# General log settings
-# Levels allowed: NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL
-SAMPLE_APPLICATION_LOGGING_LEVEL = 'CRITICAL'
-# Allowed handlers: file, console, syslog
-SAMPLE_APPLICATION_LOGGING_HANDLERS = ['file', 'console', 'syslog']
-# Only valid for 'file' handler type
-SAMPLE_APPLICATION_LOGGING_FILE_PATH = '/tmp/app.log'
+SAMPLE_APPLICATION_LOGGING_DICTIONARY = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'default': {
+            'format': '%(levelname)s\t%(process)d '
+                      '[%(asctime)s]:\t%(message)s',
+            'datefmt': '%m/%d/%Y %H:%M:%S',
+        }
+    },
+    'handlers': {
+        'file': {
+            'formatter': 'default',
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': '/tmp/app.log',
+        },
+        'console': {
+            'formatter': 'default',
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler'
+        },
+        'syslog': {
+            'formatter': 'default',
+            'level': 'DEBUG',
+            'class': 'logging.handlers.SysLogHandler',
+            'address': '/dev/log'
+        }
+    },
+    'loggers': {
+        '': {
+            'handlers': ['file', 'console', 'syslog'],
+            'level': 'CRITICAL',
+            'propagate': True,
+        },
+    },
+}
 
 SQLALCHEMY_DATABASE_URI = 'sqlite://'
 

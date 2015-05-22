@@ -5,6 +5,7 @@ Views
 from flask import current_app
 from flask.ext.restful import Resource
 from flask.ext.discoverer import advertise
+from client import client
 import time
 
 
@@ -60,7 +61,7 @@ class ExampleApiUsage(Resource):
         :return: HTTP response from the API
         """
 
-        r = current_app.config['SAMPLE_APPLICATION_CLIENT'].session.get(
+        r = client().get(
             current_app.config.get('SAMPLE_APPLICATION_ADSWS_API_URL')
         )
         return r.json()

@@ -10,7 +10,6 @@ SAMPLE_APPLICATION_PARAM = {
     'reason': 'this will allow easier integration if this app is incorporated'
               ' as a python module',
 }
-SAMPLE_APPLICATION_ADSWS_API_URL = 'https://api.adsabs.harvard.edu'
 
 # General log settings
 LOGGING_LOG_LEVEL = 'DEBUG'
@@ -31,13 +30,8 @@ LOGGING_DISK_SETTINGS = dict(filename=LOGGING_DISK_PATH,
                              delay=False,
                              utc=False)
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///'
+SQLALCHEMY_DATABASE_URI = 'sqlite://'
 
-# These lines are necessary only if the app needs to be a client of the
-# adsws-api
-# This pattern will be deprecated in the next release
-from client import Client
+# These values are necessary only if the app needs to be a client of the API
 SAMPLE_APPLICATION_ADSWS_API_TOKEN = 'this is a secret api token!'
-SAMPLE_APPLICATION_CLIENT = Client(
-    {'TOKEN': SAMPLE_APPLICATION_ADSWS_API_TOKEN}
-)
+SAMPLE_APPLICATION_ADSWS_API_URL = 'https://api.adsabs.harvard.edu'

@@ -3,7 +3,7 @@ Example manage.py script, which is responsible for providing a command-line
 interface to application specific tasks, such as managing databases.
 """
 
-from flask.ext.script import Manager
+from flask.ext.script import Manager, Command
 from flask.ext.migrate import Migrate, MigrateCommand
 from models import db
 from app import create_app

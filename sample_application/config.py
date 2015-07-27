@@ -31,16 +31,10 @@ SAMPLE_APPLICATION_LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler'
         },
-        'syslog': {
-            'formatter': 'default',
-            'level': 'DEBUG',
-            'class': 'logging.handlers.SysLogHandler',
-            'address': '/dev/log'
-        }
     },
     'loggers': {
         '': {
-            'handlers': ['file', 'console', 'syslog'],
+            'handlers': ['file', 'console'],
             'level': 'CRITICAL',
             'propagate': True,
         },

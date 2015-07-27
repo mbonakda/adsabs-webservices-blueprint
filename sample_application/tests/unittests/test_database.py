@@ -1,13 +1,7 @@
-import sys
-import os
-PROJECT_HOME = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../../')
-)
-sys.path.append(PROJECT_HOME)
-import unittest
 from flask.ext.testing import TestCase
-from app import create_app
-from models import db, FavoriteColor
+from sample_application.app import create_app
+from sample_application.models import db, FavoriteColor
+
 
 class TestDatabase(TestCase):
     """
@@ -54,6 +48,3 @@ class TestDatabase(TestCase):
         rv = FavoriteColor.query.filter_by(username='unittest').first()
         self.assertEqual(rv.username,'unittest')
         self.assertEqual(rv.color, 'red')
-
-if __name__ == '__main__':
-    unittest.main(verbosity=2)

@@ -1,17 +1,9 @@
 """
 Test webservices
 """
-
-import sys
-import os
-PROJECT_HOME = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../../'))
-sys.path.append(PROJECT_HOME)
-
-import unittest
 import time
 import json
-import app
+from sample_application import app
 from flask.ext.testing import TestCase
 from flask import url_for
 from httpretty import HTTPretty
@@ -115,7 +107,6 @@ class TestWebservices(TestCase):
                         self.app.config.get('SAMPLE_APPLICATION_ADSWS_API_URL')
                 ):
                     r = self.client.get(url)
-
                 self.assertTrue(r.status_code < 500, msg="URL: {0}".format(url))
 
     def test_resources_route(self):
@@ -180,7 +171,3 @@ class TestWebservices(TestCase):
                 token=self.app.config.get('SAMPLE_APPLICATION_ADSWS_API_TOKEN')
             )
         )
-
-
-if __name__ == '__main__':
-    unittest.main(verbosity=2)

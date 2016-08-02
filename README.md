@@ -27,6 +27,17 @@ For convenience, a Vagrantfile and puppet manifest are available to facilitate d
 
 To load and enter the VM: `vagrant up && vagrant ssh`
 
+Alternatively, you can follow these simple steps:
+
+  * virtualenv virtualenv
+  * source virtualenv/bin/activate
+  * pip install -r dev-requirements.txt
+  * pip install -r requirements.txt
+  * python cors.py
+
+Note: cors.py will start the microservice in a simple HTTP webserver with approparite CORS headers (so that you can access localhost:5000/.... from a browser). Normally, you would run
+`python wsgi.py` or use a faster `gunicorn` to start `wsgi.py`.
+
 ## database migrations (only relevant when a database is managed by the application)
 
 To make changes to the database schema associated with the application:

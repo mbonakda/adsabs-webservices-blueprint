@@ -1,2 +1,3 @@
 Flask-Testing
 nose
+flask-cors==2.0.0

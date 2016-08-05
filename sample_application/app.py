@@ -3,7 +3,7 @@ Application factory
 """
 
 import logging.config
-from views import UnixTime, PrintArg, ExampleApiUsage
+from views import UnixTime, PrintArg, ExampleApiUsage, HopperService
 from models import db
 
 from flask import Flask
@@ -37,6 +37,7 @@ def create_app():
     api.add_resource(UnixTime, '/time')
     api.add_resource(PrintArg, '/print/<string:arg>')
     api.add_resource(ExampleApiUsage, '/search')
+    api.add_resource(HopperService, '/hopper/<string:bibcodes>') # /print/<array:bibcodes>')
 
     return app
 

@@ -45,6 +45,25 @@ class PrintArg(Resource):
         return {'arg': arg}, 200
 
 
+class HopperService(Resource):
+    """
+    Returns the :arg in the route
+    """
+    decorators = [advertise('scopes', 'rate_limit')]
+    scopes = ['scope1', 'scope2']
+    rate_limit = [1000, 60*60*24]
+
+    def get(self, bibcodes):
+        """
+        HTTP GET request that returns the string passed
+        :param arg: string to send as return
+
+        :return: argument given to the resource
+        """
+        return {'bibcodes': bibcodes}, 200
+        current_app.logger.info('HopperService is working!')
+
+
 class ExampleApiUsage(Resource):
     """
     This resource uses the client.session.get() method to access an api that

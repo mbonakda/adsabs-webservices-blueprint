@@ -60,8 +60,9 @@ class HopperService(Resource):
 
         :return: argument given to the resource
         """
-        return {'bibcodes': bibcodes}, 200
         current_app.logger.info('HopperService is working!')
+        return {'bibcodes': bibcodes}, 200
+
 
 
 class ExampleApiUsage(Resource):

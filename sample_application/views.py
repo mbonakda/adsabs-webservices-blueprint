@@ -2,7 +2,7 @@
 Views
 """
 
-from flask import current_app
+from flask import current_app, request
 from flask.ext.restful import Resource
 from flask.ext.discoverer import advertise
 from client import client
@@ -53,15 +53,17 @@ class HopperService(Resource):
     scopes = ['scope1', 'scope2']
     rate_limit = [1000, 60*60*24]
 
-    def get(self, bibcodes):
+    def post(self,bibcodes):
         """
-        HTTP GET request that returns the string passed
+        HTTP POST request that returns the string passed
         :param arg: string to send as return
 
         :return: argument given to the resource
         """
-        current_app.logger.info('HopperService is working!')
-        return {'bibcodes': bibcodes}, 200
+
+        json_data = request.get_json(force=True)
+        result    = [{'bibcode': x} for x in json_data[0:10]]
+        return {'bibcodes': result}, 200
 
 
 
